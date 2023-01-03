@@ -2,42 +2,46 @@ import pyautogui
 import random as rand
 import time
 
-maxWidth, maxHeigth = pyautogui.size()
-print("WORKING (" + str(maxWidth) +"," + str(maxHeigth) + "):")
+workingLoop = True
+sleepingTime = 30
 
-lastX = -1
-lastY = -1
+def working():
+    maxWidth, maxHeigth = pyautogui.size()
+    print("WORKING (" + str(maxWidth) +"," + str(maxHeigth) + "):")
 
-while True:
+    lastX = -1
+    lastY = -1
 
-    # 1 - TRAE POSICION ACTUAL MOUSE:
-    currentMouseX, currentMouseY = pyautogui.position()
+    while workingLoop:
 
-    # 2 - GENERA UN NUMERO RANDOM:
-    random = rand.random();
+        # 1 - TRAE POSICION ACTUAL MOUSE:
+        currentMouseX, currentMouseY = pyautogui.position()
 
-    noMeMovi = True
+        # 2 - GENERA UN NUMERO RANDOM:
+        random = rand.random();
 
-    # 3 - TRAIGO X , Y
-    print("LASTX:" + str(lastX) +","+ str(lastY) + " -> NOW: " + str(currentMouseX) +"," + str(currentMouseY))
-
-    if lastX == -1 or lastY == -1:
         noMeMovi = True
 
-    if lastX != currentMouseX and lastY != currentMouseY:
-        noMeMovi = False
+        # 3 - TRAIGO X , Y
+        print("LASTX:" + str(lastX) +","+ str(lastY) + " -> NOW: " + str(currentMouseX) +"," + str(currentMouseY))
+
+        if lastX == -1 or lastY == -1:
+            noMeMovi = True
+
+        if lastX != currentMouseX and lastY != currentMouseY:
+            noMeMovi = False
 
 
-    if noMeMovi:
-        # 4 - SI NO ME MUEVO, ENTONCES GENERO UN NUEVO NUMERO RANDOM Y MUEVO EL MOUSE:
-        nuevoY = int(random * maxHeigth)
-        nuevoX = int(random * maxWidth)
-        pyautogui.moveTo(nuevoX, nuevoY)
+        if noMeMovi:
+            # 4 - SI NO ME MUEVO, ENTONCES GENERO UN NUEVO NUMERO RANDOM Y MUEVO EL MOUSE:
+            nuevoY = int(random * maxHeigth)
+            nuevoX = int(random * maxWidth)
+            pyautogui.moveTo(nuevoX, nuevoY)
 
-        # MOVER EL MOUSE A POSICION:
-        print("NEW POSITION: (" + str(nuevoX) + "," + str(nuevoY) + ")")
+            # MOVER EL MOUSE A POSICION:
+            print("NEW POSITION: (" + str(nuevoX) + "," + str(nuevoY) + ")")
 
-    currentMouseX, currentMouseY = pyautogui.position()
-    lastX = currentMouseX
-    lastY = currentMouseY
-    time.sleep(30)
+        currentMouseX, currentMouseY = pyautogui.position()
+        lastX = currentMouseX
+        lastY = currentMouseY
+        time.sleep(5)
