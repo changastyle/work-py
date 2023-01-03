@@ -1,10 +1,18 @@
 import pyautogui
 import random as rand
 import time
+import threading
 
 workingLoop = True
 sleepingTime = 30
 
+hiloGlobal= -1
+def hilo():
+    hiloGlobal = threading.Thread(target=working)
+    hiloGlobal.start()
+
+def hiloFinish():
+    hiloGlobal.join()
 def working():
     maxWidth, maxHeigth = pyautogui.size()
     print("WORKING (" + str(maxWidth) +"," + str(maxHeigth) + "):")
@@ -44,4 +52,4 @@ def working():
         currentMouseX, currentMouseY = pyautogui.position()
         lastX = currentMouseX
         lastY = currentMouseY
-        time.sleep(5)
+        time.sleep(sleepingTime)
